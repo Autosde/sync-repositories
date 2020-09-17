@@ -23,7 +23,7 @@ git init
 git remote add origin "https://'abc':$TOKEN@github.com/Autosde/manageiq.git"
 
 echo "Adding tmp_upstream $UPSTREAM_REPO"
-git remote add tmp_upstream "https://'abc':$TOKEN@github.com/${UPSTREAM_REPO}.git
+git remote add tmp_upstream "https://'abc':$TOKEN@github.com/${UPSTREAM_REPO}.git"
 
 echo "Fetching tmp_upstream"
 git fetch tmp_upstream
