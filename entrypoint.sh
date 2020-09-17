@@ -20,10 +20,10 @@ git init
 #git config --unset-all http."https://github.com/".extraheader || :
 
 #echo "Resetting origin to: https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
-git remote set-url origin "https://'abc':$TOKEN@github.com/$GITHUB_REPOSITORY"
+git remote add origin "https://'abc':$TOKEN@github.com/Autosde/manageiq.git"
 
 echo "Adding tmp_upstream $UPSTREAM_REPO"
-git remote add tmp_upstream "$UPSTREAM_REPO"
+git remote add tmp_upstream "https://'abc':$TOKEN@github.com/${UPSTREAM_REPO}.git
 
 echo "Fetching tmp_upstream"
 git fetch tmp_upstream
