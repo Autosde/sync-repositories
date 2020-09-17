@@ -4,7 +4,11 @@ inputs:
   upstream:  # id of input
     description: 'upstream'
     required: true
-    default: 'World'
+    default: 'ABC'
+  token:  # id of input
+    description: 'token'
+    required: true
+    default: 'ABC'  
 runs:
   using: 'docker'
   image: 'Dockerfile'
