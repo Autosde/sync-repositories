@@ -26,7 +26,7 @@ echo "Adding tmp_upstream $UPSTREAM_REPO"
 git remote add tmp_upstream "https://'abc':$TOKEN@github.com/${UPSTREAM_REPO}.git"
 
 echo "Fetching tmp_upstream"
-git fetch tmp_upstream
+git fetch tmp_upstream master
 git remote --verbose
 
 echo "Pushing changings from tmp_upstream to origin"
