@@ -3,8 +3,9 @@
 set -e
 
 
-UPSTREAM_REPO=$1
-#BRANCH_MAPPING=$2
+TOKEN=$1
+UPSTREAM_REPO=$2
+
 
 if [[ -z "$UPSTREAM_REPO" ]]; then
   echo "Missing \$UPSTREAM_REPO"
@@ -16,8 +17,8 @@ echo "UPSTREAM_REPO=$UPSTREAM_REPO"
 
 #git config --unset-all http."https://github.com/".extraheader || :
 
-echo "Resetting origin to: https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
-git remote set-url origin "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
+#echo "Resetting origin to: https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
+git remote set-url origin "https://'abc':$TOKEN@github.com/$GITHUB_REPOSITORY"
 
 echo "Adding tmp_upstream $UPSTREAM_REPO"
 git remote add tmp_upstream "$UPSTREAM_REPO"
