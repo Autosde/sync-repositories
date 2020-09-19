@@ -1,18 +1,28 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  upstream:  # id of input
-    description: 'upstream'
+  repo_from:
+    description: 'repo to sync from'
     required: true
-    default: 'ABC'
-  token:  # id of input
-    description: 'token'
+    default: 'IBM/manageiq'
+  repo_to:
+    description: 'repo to sync to'
     required: true
-    default: 'ABC'  
+    default: 'Autosde/manageiq'
+  branch:
+    description: 'branch to sync'
+    required: false
+    default: 'master'
+  token:
+    description: 'token for push'
+    required: true
+    default: 'No Token'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.token }}
-    - ${{ inputs.upstream }}
+    - ${{ inputs.repo_from }}
+    - ${{ inputs.repo_to }}
+    - ${{ inputs.branch }}
     

@@ -2,42 +2,46 @@
 
 set -e
 
+TOKEN_TO_REPO=$1
+SYNC_FROM_REPO=$2
+SYNC_TO_REPO=$3
+BRANCH=$4
 
-TOKEN=$1
-UPSTREAM_REPO=$2
-
-
-if [[ -z "$UPSTREAM_REPO" ]]; then
-  echo "Missing \$UPSTREAM_REPO"
+if [[ -z "SYNC_FROM_REPO" ]]; then
+  echo "Missing \SYNC_FROM_REPO"
   exit 1
 fi
 
-echo "UPSTREAM_REPO=$UPSTREAM_REPO"
-echo "TOKEN=$TOKEN"
-#echo "BRANCHES=$BRANCH_MAPPING"
+if [[ -z "SYNC_TO_REPO" ]]; then
+  echo "Missing \SYNC_TO_REPO"
+  exit 1
+fi
+
+echo "SYNC_FROM_REPO=SYNC_FROM_REPO"
+echo "TOKEN_TO_REPO=$TOKEN_TO_REPO"
+echo "BRANCH=$BRANCH"
 
 pwd
 ls -al
 git init
 #
-##git config --unset-all http."https://github.com/".extraheader || :
+git config --unset-all http."https://github.com/".extraheader || :
 #
-#echo "Resetting origin to: https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
-git remote add origin "https://'abc':$TOKEN@github.com/Autosde/manageiq.git"
+echo "Resetting origin to: https://$GITHUB_ACTOR:$TOKEN_TO_REPO@github.com/$SYNC_TO_REPO"
+git remote set-url origin "https://$GITHUB_ACTOR:$TOKEN_TO_REPO@github.com/${SYNC_TO_REPO}.git"
 
 #
-#echo "Adding tmp_upstream $UPSTREAM_REPO"
-git remote add tmp_upstream "https://'abc':$TOKEN@github.com/${UPSTREAM_REPO}.git"
+#echo "Adding from_repo $SYNC_FROM_REPO"
+git remote add from_repo "https://github.com/${SYNC_FROM_REPO}.git"
 git remote -v
 #
-#echo "Fetching tmp_upstream"
-git fetch tmp_upstream master
-#git remote --verbose
+#echo "Fetching from_repo"
+git fetch from_repo master
+
 #
-echo "Pushing changing from tmp_upstream to origin"
-#git push origin "refs/remotes/tmp_upstream/${BRANCH_MAPPING%%:*}:refs/heads/${BRANCH_MAPPING#*:}" --force
+echo "Pushing  from 'from_repo' to origin" with force
+git push --dry-run origin "refs/remotes/from_repo/${BRANCH}:refs/heads/${BRANCH}" --force
 #
-git push origin master
 #echo "Removing tmp_upstream"
-git remote rm tmp_upstream
-git remote --verbose
+#git remote rm tmp_upstream
+# git remote --verbose
