@@ -27,8 +27,8 @@ git init
 #
 git config --unset-all http."https://github.com/".extraheader || :
 #
-echo "Resetting origin to: https://$GITHUB_ACTOR:$TOKEN_TO_REPO@github.com/$SYNC_TO_REPO"
-git remote set-url origin "https://$GITHUB_ACTOR:$TOKEN_TO_REPO@github.com/${SYNC_TO_REPO}.git"
+echo "Setting origin to: https://$GITHUB_ACTOR:$TOKEN_TO_REPO@github.com/$SYNC_TO_REPO"
+git remote add origin "https://$GITHUB_ACTOR:$TOKEN_TO_REPO@github.com/${SYNC_TO_REPO}.git"
 
 #
 #echo "Adding from_repo $SYNC_FROM_REPO"
