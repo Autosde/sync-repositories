@@ -1,23 +1,35 @@
-# Hello world docker action
-
+# Sync repositories action
 This action prints "Hello World" to the log or "Hello" + the name of a person to greet. To learn how this action was built, see "[Creating a Docker container action](https://help.github.com/en/articles/creating-a-docker-container-action)" in the GitHub Help documentation.
 
 ## Inputs
 
-### `who-to-greet`
+### `repo_to`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** The repository we want to sync to. Default `"Autosde/manageiq""`.
 
-## Outputs
+### `repo_from`
 
-### `time`
+**Required** The repository we want to sync from. Default `"IBM/manageiq"`.
 
-The time we greeted you.
+### `branch`
 
+**Required** The name of the branch on both repo. Default `"master"`.
+
+### `token`
+
+** Personal access token (PAT), defined for current repo
 ## Example usage
 
 ```yaml
-uses: actions/hello-world-docker-action@master
-with:
-  who-to-greet: 'Mona the Octocat'
+
+jobs:
+  sync-manageiq:
+    runs-on: ubuntu-latest
+    steps:
+    - name: sync
+      uses: Autosde/sync-repositories@main
+      with:
+        token: ${{ env.REPO_KEY }}
+        repo_from: IBM/manageiq
+        repo_to: Autosde/manageiq
 ```

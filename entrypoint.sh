@@ -22,27 +22,18 @@ echo "SYNC_TO_REPO=$SYNC_TO_REPO"
 echo "BRANCH=$BRANCH"
 echo "TOKEN_TO_REPO=$TOKEN_TO_REPO"
 
-pwd
-ls -al
 git init
-#
-git config --unset-all http."https://github.com/".extraheader || :
-#
-echo "Setting origin to: https://$GITHUB_ACTOR:$TOKEN_TO_REPO@github.com/$SYNC_TO_REPO"
+
+echo "Setting origin to: https://$TOKEN_TO_REPO@github.com/$SYNC_TO_REPO"
 git remote add origin "https://$TOKEN_TO_REPO@github.com/${SYNC_TO_REPO}.git"
 
-#
-#echo "Adding from_repo $SYNC_FROM_REPO"
+echo "Adding from_repo $SYNC_FROM_REPO"
 git remote add from_repo "https://github.com/${SYNC_FROM_REPO}.git"
 git remote -v
-#
-#echo "Fetching from_repo"
+
+echo "Fetching from_repo"
 git fetch from_repo master
 
-#
-echo "Pushing  from 'from_repo' to origin" with force
+echo "Pushing   to origin" with force
 git push  origin "refs/remotes/from_repo/${BRANCH}:refs/heads/${BRANCH}" --force
-#
-#echo "Removing tmp_upstream"
-#git remote rm tmp_upstream
-# git remote --verbose
+
