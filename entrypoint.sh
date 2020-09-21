@@ -32,7 +32,7 @@ git remote add from_repo "https://github.com/${SYNC_FROM_REPO}.git"
 git remote -v
 
 echo "Fetching from_repo"
-git fetch from_repo master
+git fetch from_repo ${BRANCH}
 
 echo "Pushing   to origin" with force
 git push  origin "refs/remotes/from_repo/${BRANCH}:refs/heads/${BRANCH}" --force
